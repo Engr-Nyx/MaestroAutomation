@@ -1,11 +1,14 @@
 url: https://www.demoblaze.com
 env:
-  PRODUCT: ${PRODUCT}
+  PRODUCT_ID: ${PRODUCT_ID}
+  USERNAME: ${USERNAME}
+  PASSWORD: ${PASSWORD}
 ---
-- tapOn: ${PRODUCT}
-- assertVisible: "Add to cart"
-- tapOn: "Add to cart"
-# JS alert "Product added" is auto-dismissed by the web driver; wait for it to clear
-- extendedWaitUntil:
-    visible: ${PRODUCT}
-    timeout: 5000
+# The UI "Add to cart" raises a native alert that blocks Maestro web, so the product is
+# added through the API. Log in through the UI afterwards to see it in the cart.
+- runScript:
+    file: ../scripts/api_add_to_cart.js
+    env:
+      PRODUCT_ID: ${PRODUCT_ID}
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}

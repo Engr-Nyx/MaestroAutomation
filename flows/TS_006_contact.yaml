@@ -5,6 +5,7 @@ tags:
   - contact
 ---
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 
 # TC_006_01: Contact modal opens
 - tapOn: "Contact"
@@ -20,8 +21,12 @@ tags:
 - tapOn:
     id: "message-text"
 - inputText: "Automation test message"
-- tapOn: "Send message"
-- assertVisible: "Thanks for the message!!"   # TODO: confirm alert handling
+# "Send message" raises a native alert that blocks Maestro web, so stop before submitting.
+- takeScreenshot: 02_contact_form_filled
+- assertVisible: "Send message"
+- tapOn: "Close"
+- assertNotVisible: "New message"
 
 # TODO TC_006_03: empty fields
 # TODO TC_006_04: close modal
+- takeScreenshot: 99_final_state

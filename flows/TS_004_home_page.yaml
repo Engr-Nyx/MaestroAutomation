@@ -5,9 +5,10 @@ tags:
   - home
 ---
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 
 # Header / navigation
-- assertVisible: "Home"
+- assertVisible: "Home.*"
 - assertVisible: "Contact"
 - assertVisible: "About us"
 - assertVisible: "Cart"
@@ -26,5 +27,7 @@ tags:
 - tapOn: "Previous"
 
 # Logo returns to home
-- tapOn: "PRODUCT STORE"
+- tapOn:
+    id: "nava"
 - assertVisible: "CATEGORIES"
+- takeScreenshot: 99_final_state

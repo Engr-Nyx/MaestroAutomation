@@ -1,4 +1,6 @@
 url: https://www.demoblaze.com
 ---
+- clearState
 - openLink: https://www.demoblaze.com
-- assertVisible: "PRODUCT STORE"
+- assertVisible:
+    id: "nava"

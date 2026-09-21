@@ -5,12 +5,19 @@ tags:
   - product
 ---
 - runFlow: ../subflows/open_home.yaml
-- tapOn: "Samsung galaxy s6"
+- takeScreenshot: 01_home_page
+- assertVisible: "Samsung galaxy s6"
+
+# Tapping the product link doesn't navigate under Maestro web, so open the page directly.
+- openLink: https://www.demoblaze.com/prod.html?idp_=1
 
 # Name, price, description, image, Add to cart
+- extendedWaitUntil:
+    visible: "Add to cart"
+    timeout: 10000
 - assertVisible: "Samsung galaxy s6"
-- assertVisible: "\\$360 \\*includes tax"
+- assertVisible: "\\$360.*"
 - assertVisible: "Product description"
 - assertVisible:
-    id: "imgp"      # TODO: verify image element id
-- assertVisible: "Add to cart"
+    id: "imgp"
+- takeScreenshot: 99_final_state

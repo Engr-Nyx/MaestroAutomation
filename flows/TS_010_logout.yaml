@@ -8,6 +8,7 @@ env:
   PASSWORD: test
 ---
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 - runFlow:
     file: ../subflows/login.yaml
     env:
@@ -15,6 +16,7 @@ env:
       PASSWORD: ${PASSWORD}
 
 # TC_010_01: Logout
+- takeScreenshot: 02_logged_in
 - tapOn: "Log out"
 - assertVisible: "Log in"
 - assertVisible: "Sign up"
@@ -23,3 +25,4 @@ env:
 # TC_010_02: Session cleared after refresh
 - openLink: https://www.demoblaze.com
 - assertVisible: "Log in"
+- takeScreenshot: 99_final_state

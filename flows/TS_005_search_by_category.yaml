@@ -5,6 +5,7 @@ tags:
   - category
 ---
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 
 - tapOn: "Phones"
 - assertVisible: "Samsung galaxy s6"
@@ -16,3 +17,4 @@ tags:
 
 - tapOn: "Monitors"
 - assertVisible: "Apple monitor 24"
+- takeScreenshot: 99_final_state

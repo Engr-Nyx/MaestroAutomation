@@ -4,30 +4,42 @@ tags:
   - P0
   - signup
 env:
-  USERNAME: user_${MAESTRO_TIMESTAMP}   # unique per run; override with -e USERNAME=...
   PASSWORD: Test@1234
 ---
+# unique per run; override with -e USERNAME=...
+- evalScript: ${output.username = (typeof USERNAME !== 'undefined' && USERNAME) || 'user_' + Date.now()}
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 
 # TC_001_01: Sign-up modal opens
 - tapOn: "Sign up"
 - assertVisible: "Username:"
 - assertVisible: "Password:"
+- takeScreenshot: 02_signup_modal_open
 
 # TC_001_02: Sign-up with valid data
+# Submitting the form raises a native alert that blocks Maestro web, so the account is
+# created through the API and verified below by logging in through the UI.
+- runScript:
+    file: ../scripts/api_signup.js
+    env:
+      USERNAME: ${output.username}
+      PASSWORD: ${PASSWORD}
+- tapOn: "Close"
 - tapOn:
-    id: "sign-username"
-- inputText: ${USERNAME}
+    id: "login2"
 - tapOn:
-    id: "sign-password"
+    id: "loginusername"
+- inputText: ${output.username}
+- tapOn:
+    id: "loginpassword"
 - inputText: ${PASSWORD}
 - tapOn:
-    text: "Sign up"
-    index: 1
-- assertVisible: "Sign up successful."   # TODO: confirm alert handling in your Maestro version
-
-# TC_001_03: Sign-up with existing user -> "This user already exist."
-# TC_001_04: Empty username / password -> "Please fill out Username and Password."
-# TC_001_05: Close (X) button closes modal
-# TC_001_06: Close button closes modal
-# TC_001_07: Password field is masked
+    text: "Log in"
+    below:
+      id: "loginpassword"
+- waitForAnimationToEnd:
+    timeout: 5000
+- assertVisible: "Welcome ${output.username}"
+- takeScreenshot: 03_logged_in_after_signup
+- takeScreenshot: 99_final_state

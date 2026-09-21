@@ -12,5 +12,8 @@ env:
 - inputText: ${PASSWORD}
 - tapOn:
     text: "Log in"
-    index: 1
+    below:
+      id: "loginpassword"
+- waitForAnimationToEnd:
+    timeout: 5000
 - assertVisible: "Welcome ${USERNAME}"

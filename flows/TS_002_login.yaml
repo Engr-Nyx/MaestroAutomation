@@ -8,6 +8,7 @@ env:
   PASSWORD: test
 ---
 - runFlow: ../subflows/open_home.yaml
+- takeScreenshot: 01_home_page
 
 # TC_002_01: Login modal opens
 - tapOn: "Log in"
@@ -28,3 +29,4 @@ env:
 # TODO TC_002_06: close modal
 # TODO TC_002_07: password masked
 # TODO TC_002_08: session persists after page refresh
+- takeScreenshot: 99_final_state
