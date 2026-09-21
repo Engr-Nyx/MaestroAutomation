@@ -39,6 +39,9 @@ jobs:
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
 
+      - name: Allow Chrome sandbox on Ubuntu runner
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
       - name: Run Maestro flows
         env:
           TAGS: ${{ github.event.inputs.tags }}
@@ -49,7 +52,7 @@ jobs:
           ARGS=""
           [ -n "$TAGS" ] && ARGS="--include-tags=$TAGS"
           [ -n "$USERNAME" ] && ARGS="$ARGS -e USERNAME=$USERNAME -e PASSWORD=$PASSWORD"
-          maestro test flows/ \
+          maestro test flows/ --headless \
             --format junit --output allure-results/maestro-junit.xml \
             --debug-output maestro-debug --flatten-debug-output \
             $ARGS
