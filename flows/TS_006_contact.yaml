@@ -1,0 +1,27 @@
+url: https://www.demoblaze.com
+name: TS_006 - Validate the Contact functionality
+tags:
+  - P2
+  - contact
+---
+- runFlow: ../subflows/open_home.yaml
+
+# TC_006_01: Contact modal opens
+- tapOn: "Contact"
+- assertVisible: "New message"
+
+# TC_006_02: Send message with valid data
+- tapOn:
+    id: "recipient-email"
+- inputText: "qa@example.com"
+- tapOn:
+    id: "recipient-name"
+- inputText: "QA Tester"
+- tapOn:
+    id: "message-text"
+- inputText: "Automation test message"
+- tapOn: "Send message"
+- assertVisible: "Thanks for the message!!"   # TODO: confirm alert handling
+
+# TODO TC_006_03: empty fields
+# TODO TC_006_04: close modal

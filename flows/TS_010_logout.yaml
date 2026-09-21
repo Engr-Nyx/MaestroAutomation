@@ -1,0 +1,25 @@
+url: https://www.demoblaze.com
+name: TS_010 - Validate the Logout functionality
+tags:
+  - P1
+  - logout
+env:
+  USERNAME: test
+  PASSWORD: test
+---
+- runFlow: ../subflows/open_home.yaml
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}
+
+# TC_010_01: Logout
+- tapOn: "Log out"
+- assertVisible: "Log in"
+- assertVisible: "Sign up"
+- assertNotVisible: "Welcome ${USERNAME}"
+
+# TC_010_02: Session cleared after refresh
+- openLink: https://www.demoblaze.com
+- assertVisible: "Log in"

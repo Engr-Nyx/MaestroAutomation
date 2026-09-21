@@ -1,0 +1,27 @@
+url: https://www.demoblaze.com
+name: TS_008 - Validate the Shopping Cart functionality
+tags:
+  - P0
+  - cart
+---
+- runFlow: ../subflows/open_home.yaml
+
+# TC_008_01: Add product to cart
+- runFlow:
+    file: ../subflows/add_to_cart.yaml
+    env:
+      PRODUCT: "Samsung galaxy s6"
+
+# TC_008_02: Product shown in cart with price and total
+- tapOn: "Cart"
+- assertVisible: "Samsung galaxy s6"
+- assertVisible: "360"
+- assertVisible: "Total"
+
+# TC_008_03: Delete product from cart
+- tapOn: "Delete"
+- assertNotVisible: "Samsung galaxy s6"
+
+# TODO TC_008_04: add multiple products, total is sum
+# TODO TC_008_05: cart persists after refresh
+# TODO TC_008_06: Place Order button visible

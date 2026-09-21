@@ -1,0 +1,22 @@
+# Maestro workspace config - Demoblaze (web)
+# Run all:        maestro test flows/
+# Run by tag:     maestro test flows/ --include-tags=P0
+# Run one flow:   maestro test flows/TS_001_signup.yaml
+flows:
+  - flows/*
+includeTags: []
+excludeTags:
+  - wip
+executionOrder:
+  continueOnFailure: true
+  flowsOrder:
+    - TS_001_signup
+    - TS_002_login
+    - TS_003_product_details
+    - TS_004_home_page
+    - TS_005_search_by_category
+    - TS_006_contact
+    - TS_007_about_us
+    - TS_008_shopping_cart
+    - TS_009_place_order
+    - TS_010_logout

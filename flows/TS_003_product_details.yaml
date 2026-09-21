@@ -1,0 +1,16 @@
+url: https://www.demoblaze.com
+name: TS_003 - Validate product details (name, image, description, price)
+tags:
+  - P1
+  - product
+---
+- runFlow: ../subflows/open_home.yaml
+- tapOn: "Samsung galaxy s6"
+
+# Name, price, description, image, Add to cart
+- assertVisible: "Samsung galaxy s6"
+- assertVisible: "\\$360 \\*includes tax"
+- assertVisible: "Product description"
+- assertVisible:
+    id: "imgp"      # TODO: verify image element id
+- assertVisible: "Add to cart"

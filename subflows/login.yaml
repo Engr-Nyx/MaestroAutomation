@@ -1,0 +1,16 @@
+url: https://www.demoblaze.com
+env:
+  USERNAME: ${USERNAME}
+  PASSWORD: ${PASSWORD}
+---
+- tapOn: "Log in"
+- tapOn:
+    id: "loginusername"
+- inputText: ${USERNAME}
+- tapOn:
+    id: "loginpassword"
+- inputText: ${PASSWORD}
+- tapOn:
+    text: "Log in"
+    index: 1
+- assertVisible: "Welcome ${USERNAME}"

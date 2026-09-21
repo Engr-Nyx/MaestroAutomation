@@ -1,0 +1,30 @@
+url: https://www.demoblaze.com
+name: TS_002 - Validate the Login functionality
+tags:
+  - P0
+  - login
+env:
+  USERNAME: test          # existing account; override with -e
+  PASSWORD: test
+---
+- runFlow: ../subflows/open_home.yaml
+
+# TC_002_01: Login modal opens
+- tapOn: "Log in"
+- assertVisible: "Username:"
+- assertVisible: "Password:"
+- tapOn: "Close"
+
+# TC_002_02: Login with valid credentials
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}
+
+# TODO TC_002_03: invalid password -> "Wrong password."
+# TODO TC_002_04: unregistered user -> "User does not exist."
+# TODO TC_002_05: empty fields -> "Please fill out Username and Password."
+# TODO TC_002_06: close modal
+# TODO TC_002_07: password masked
+# TODO TC_002_08: session persists after page refresh

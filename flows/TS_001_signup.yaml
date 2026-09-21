@@ -1,0 +1,33 @@
+url: https://www.demoblaze.com
+name: TS_001 - Validate the Sign-up functionality
+tags:
+  - P0
+  - signup
+env:
+  USERNAME: user_${MAESTRO_TIMESTAMP}   # unique per run; override with -e USERNAME=...
+  PASSWORD: Test@1234
+---
+- runFlow: ../subflows/open_home.yaml
+
+# TC_001_01: Sign-up modal opens
+- tapOn: "Sign up"
+- assertVisible: "Username:"
+- assertVisible: "Password:"
+
+# TC_001_02: Sign-up with valid data
+- tapOn:
+    id: "sign-username"
+- inputText: ${USERNAME}
+- tapOn:
+    id: "sign-password"
+- inputText: ${PASSWORD}
+- tapOn:
+    text: "Sign up"
+    index: 1
+- assertVisible: "Sign up successful."   # TODO: confirm alert handling in your Maestro version
+
+# TC_001_03: Sign-up with existing user -> "This user already exist."
+# TC_001_04: Empty username / password -> "Please fill out Username and Password."
+# TC_001_05: Close (X) button closes modal
+# TC_001_06: Close button closes modal
+# TC_001_07: Password field is masked

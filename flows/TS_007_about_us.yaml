@@ -1,0 +1,18 @@
+url: https://www.demoblaze.com
+name: TS_007 - Validate the About Us functionality
+tags:
+  - P2
+  - about
+---
+- runFlow: ../subflows/open_home.yaml
+
+# TC_007_01: About us modal with video opens
+- tapOn: "About us"
+- assertVisible: "About us"
+- assertVisible:
+    id: "example-video"
+
+# TC_007_02: Close modal
+- tapOn: "Close"
+- assertNotVisible:
+    id: "example-video"

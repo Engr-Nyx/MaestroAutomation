@@ -1,0 +1,30 @@
+url: https://www.demoblaze.com
+name: TS_004 - Validate the Home Page functionality
+tags:
+  - P1
+  - home
+---
+- runFlow: ../subflows/open_home.yaml
+
+# Header / navigation
+- assertVisible: "Home"
+- assertVisible: "Contact"
+- assertVisible: "About us"
+- assertVisible: "Cart"
+- assertVisible: "Log in"
+- assertVisible: "Sign up"
+
+# Carousel, categories, products, pagination
+- assertVisible: "CATEGORIES"
+- assertVisible: "Phones"
+- assertVisible: "Laptops"
+- assertVisible: "Monitors"
+- assertVisible: "Samsung galaxy s6"
+- scrollUntilVisible:
+    element: "Next"
+- tapOn: "Next"
+- tapOn: "Previous"
+
+# Logo returns to home
+- tapOn: "PRODUCT STORE"
+- assertVisible: "CATEGORIES"

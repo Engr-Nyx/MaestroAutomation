@@ -1,0 +1,40 @@
+url: https://www.demoblaze.com
+name: TS_009 - Validate the Place Order functionality
+tags:
+  - P0
+  - order
+---
+- runFlow: ../subflows/open_home.yaml
+- runFlow:
+    file: ../subflows/add_to_cart.yaml
+    env:
+      PRODUCT: "Samsung galaxy s6"
+- tapOn: "Cart"
+- tapOn: "Place Order"
+- assertVisible: "Place order"
+
+# TC_009_01: Order with valid data
+- tapOn:
+    id: "name"
+- inputText: "QA Tester"
+- tapOn:
+    id: "country"
+- inputText: "India"
+- tapOn:
+    id: "city"
+- inputText: "Jaipur"
+- tapOn:
+    id: "card"
+- inputText: "4111111111111111"
+- tapOn:
+    id: "month"
+- inputText: "12"
+- tapOn:
+    id: "year"
+- inputText: "2030"
+- tapOn: "Purchase"
+- assertVisible: "Thank you for your purchase!"
+- tapOn: "OK"
+- assertVisible: "CATEGORIES"
+
+# TODO TC_009_02-08: empty name/card, close modal, cancel, amount/id shown, cart cleared after purchase

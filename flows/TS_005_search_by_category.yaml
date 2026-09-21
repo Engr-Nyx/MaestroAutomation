@@ -1,0 +1,18 @@
+url: https://www.demoblaze.com
+name: TS_005 - Validate the Search for a product by category functionality
+tags:
+  - P1
+  - category
+---
+- runFlow: ../subflows/open_home.yaml
+
+- tapOn: "Phones"
+- assertVisible: "Samsung galaxy s6"
+- assertNotVisible: "MacBook air"
+
+- tapOn: "Laptops"
+- assertVisible: "MacBook air"
+- assertNotVisible: "Samsung galaxy s6"
+
+- tapOn: "Monitors"
+- assertVisible: "Apple monitor 24"

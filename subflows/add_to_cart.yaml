@@ -1,0 +1,11 @@
+url: https://www.demoblaze.com
+env:
+  PRODUCT: ${PRODUCT}
+---
+- tapOn: ${PRODUCT}
+- assertVisible: "Add to cart"
+- tapOn: "Add to cart"
+# JS alert "Product added" is auto-dismissed by the web driver; wait for it to clear
+- extendedWaitUntil:
+    visible: ${PRODUCT}
+    timeout: 5000
